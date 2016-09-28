@@ -67,10 +67,10 @@ void DriverControls(){
 	float nSpeed = distance/127;
 
 
-	motor[FL] = mecSpeed(0,nSpeed*baseSpeed,angle,127*vexRT[Ch4]/127);
-	motor[BR] = mecSpeed(0,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]/127);
-	motor[FR] = mecSpeed(1,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]/127);
-	motor[BL] = mecSpeed(1,nSpeed*baseSpeed,angle,127*vexRT[Ch4]/127);
+	motor[FL] = mecSpeed(1,nSpeed*baseSpeed,angle,127*vexRT[Ch4]/127);
+	motor[BR] = mecSpeed(1,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]/127)*0.5;
+	motor[FR] = mecSpeed(0,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]/127);
+	motor[BL] = mecSpeed(0,nSpeed*baseSpeed,angle,127*vexRT[Ch4]/127)*0.5;
 
 
 		if( vexRT[ Btn6U ] == 1)
