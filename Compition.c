@@ -106,9 +106,7 @@ void clearLCD ()
 //////////////////////////////////////////////autonomous
 void autonomous1 ()
 {
-	/*motor[m] = 127;
-	wait1Msec(7000);
-	motor[m] = 0;*/
+
 }
 void autonomous2 ()
 {
