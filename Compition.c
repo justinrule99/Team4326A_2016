@@ -39,6 +39,7 @@
 
 int autonomousMode = 1;
 int driverControlModeCount = 1;
+int controlMode = 0; //0 = normal, 1 = tank (although normal is far superior)
 float mecSpeed(int side, float speed, float angle, float turn) {
 	writeDebugStreamLine("%d",speed*sin(angle+(PI/4))+turn);
 	if(side == 0) {
@@ -61,16 +62,18 @@ float pointDistance(float x1,float y1,float x2,float y2) {
 void DriverControls(){
 
 	float angle = stickAngle(VexRT[Ch1],vexRT[Ch2]);
+	float angle2 = stickAngle(VexRT[Ch4],vexRT[Ch3]);
+	if(controlMode == 0) angle2 = angle;
 	float distance = pointDistance(VexRT[Ch1],vexRT[Ch2],0,0);
 	int baseSpeed = 100;
 
 	float nSpeed = distance/127;
 
 
-	motor[FL] = mecSpeed(1,nSpeed*baseSpeed,angle,127*vexRT[Ch4]/127);
-	motor[BR] = mecSpeed(1,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]/127)*0.5;
-	motor[FR] = mecSpeed(0,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]/127);
-	motor[BL] = mecSpeed(0,nSpeed*baseSpeed,angle,127*vexRT[Ch4]/127)*0.5;
+	motor[FL] = mecSpeed(1,nSpeed*baseSpeed,angle,127*vexRT[Ch4]*(1-controlMode)/127);
+	motor[BR] = mecSpeed(1,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]*(1-controlMode)/127)*0.5;
+	motor[FR] = mecSpeed(0,nSpeed*baseSpeed,angle,-127*vexRT[Ch4]*(1-controlMode)/127);
+	motor[BL] = mecSpeed(0,nSpeed*baseSpeed,angle,127*vexRT[Ch4]*(1-controlMode)/127)*0.5;
 
 
 		if( vexRT[ Btn6U ] == 1)
